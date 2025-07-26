@@ -1,235 +1,134 @@
-import { Project, SocialLink, StreamSchedule, BlogPost } from '@/types';
+import { Project, SocialLink, StreamSchedule } from '@/types';
 
 export const streamerInfo = {
-  name: "Aaron",
-  username: "aaron_streams",
-  tagline: "Welcome to my streaming universe!",
-  bio: "Passionate gamer and content creator streaming variety games, competitive matches, and community events. Join me for epic gaming sessions and great vibes!",
-  avatar: "/images/avatar.jpg",
+  name: "MaddWrath",
+  username: "maddwrath",
+  tagline: "Welcome to the realm of MaddWrath!",
+  bio: "Gaming enthusiast and content creator bringing you epic gameplay, exciting moments, and a community built on great vibes. Join the madness!",
+  avatar: "/profilepic.png",
   banner: "/images/banner.jpg",
-  location: "Gaming Setup, USA",
-  yearsStreaming: 3,
-  totalFollowers: 15000,
-  totalViews: 250000,
-  favoritePlatforms: ["PC", "PlayStation", "Nintendo Switch"],
-  favoriteGenres: ["FPS", "RPG", "Indie", "Horror"],
-  currentGame: "Valorant",
-  streamingDays: ["Monday", "Wednesday", "Friday", "Saturday"],
-  streamingTime: "7:00 PM - 11:00 PM EST"
+  location: "Gaming Setup",
+  yearsStreaming: 5,
+  totalFollowers: 850,
+  totalViews: 12500,
+  favoritePlatforms: ["PC", "PlayStation", "Xbox"],
+  favoriteGenres: ["MMOs", "Adventure", "FPS", "ARPG", "Indie"],
+  currentGame: "Old School Runescape",
+  streamingDays: ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+  streamingTime: "8:00 PM - 12:00 AM EST"
 };
 
 export const socialLinks: SocialLink[] = [
   {
     platform: "Twitch",
-    url: "https://twitch.tv/aaron_streams",
+    url: "https://twitch.tv/maddwrath",
     icon: "twitch",
     color: "#9146FF"
   },
   {
     platform: "YouTube",
-    url: "https://youtube.com/@aaron_streams",
+    url: "https://youtube.com/@maddwrath",
     icon: "youtube",
     color: "#FF0000"
   },
   {
-    platform: "Twitter",
-    url: "https://twitter.com/aaron_streams",
-    icon: "twitter",
-    color: "#1DA1F2"
-  },
-  {
     platform: "Discord",
-    url: "https://discord.gg/aaron_streams",
+    url: "https://discord.gg/A6Xddn4YEq",
     icon: "discord",
     color: "#5865F2"
   },
   {
     platform: "Instagram",
-    url: "https://instagram.com/aaron_streams",
+    url: "https://instagram.com/maddwrath",
     icon: "instagram",
     color: "#E4405F"
   },
   {
     platform: "TikTok",
-    url: "https://tiktok.com/@aaron_streams",
+    url: "https://tiktok.com/@maddwrath",
     icon: "tiktok",
-    color: "#000000"
+    color: "#ec4899" 
+  },
+  {
+    platform: "X",
+    url: "https://twitter.com/maddwrath",
+    icon: "x",
+    color: "#22c55e" 
   }
 ];
 
 export const streamSchedule: StreamSchedule[] = [
+  
   {
-    day: "Monday",
-    time: "7:00 PM - 11:00 PM EST",
-    game: "Valorant Ranked",
-    description: "Competitive gameplay and rank climbing"
+    day: "Tuesday",
+    time: "4:00 AM - 9:00 AM CDT",
+    game: "Action Adventures",
+    description: "Thrilling adventures"
   },
   {
     day: "Wednesday",
-    time: "7:00 PM - 11:00 PM EST",
-    game: "Variety Games",
-    description: "Exploring new indie titles and viewer suggestions"
+    time: "4:00 AM - 9:00 AM CDT",
+    game: "Action Adventures",
+    description: "Old School Runescape"
+  },
+  {
+    day: "Thursday",
+    time: "4:00 AM - 9:00 AM CDT",
+    game: "FPS Games",
+    description: "competitive gameplay"
   },
   {
     day: "Friday",
-    time: "7:00 PM - 12:00 AM EST",
-    game: "Horror Night",
-    description: "Scary games and jump scares with chat"
+    time: "4:00 AM - 9:00 AM CDT",
+    game: "Variety Night",
+    description: "viewer suggestions"
   },
   {
     day: "Saturday",
-    time: "3:00 PM - 8:00 PM EST",
-    game: "Community Games",
-    description: "Playing with viewers and subscribers"
+    time: "4:00 AM - 9:00 AM CDT",
+    game: "Variety Night",
+    description: "Chat Interaction"
   }
 ];
 
 export const projects: Project[] = [
   {
     id: "1",
-    title: "24-Hour Charity Stream",
-    description: "Raised $5,000 for local animal shelter during a 24-hour streaming marathon featuring community challenges and special guests.",
-    image: "/images/charity-stream.jpg",
+    title: "Epic Gaming Marathon",
+    description: "12-hour gaming marathon featuring multiple games and raising funds for gaming accessibility charity.",
+    image: "/images/gaming-marathon.jpg",
     date: "2024-06-15",
-    tags: ["Charity", "Community", "Marathon"],
-    link: "https://youtube.com/watch?v=charity-stream",
+    tags: ["Marathon", "Charity", "Community"],
+    link: "https://youtube.com/watch?v=gaming-marathon",
     featured: true
   },
   {
     id: "2",
-    title: "Monthly Tournament Series",
-    description: "Organized and hosted monthly Valorant tournaments for the community with cash prizes and custom trophies.",
-    image: "/images/tournament.jpg",
+    title: "MaddWrath Community Events",
+    description: "Regular community events including game nights, tournaments, and special collaborations with other streamers.",
+    image: "/images/community-events.jpg",
     date: "2024-05-01",
-    tags: ["Tournament", "Valorant", "Community"],
-    link: "https://discord.gg/tournament",
+    tags: ["Community", "Events", "Collaboration"],
+    link: "https://discord.gg/maddwrath-events",
     featured: true
   },
   {
     id: "3",
-    title: "Indie Game Showcase",
-    description: "Weekly series featuring upcoming indie games, providing feedback to developers and showcasing hidden gems.",
-    image: "/images/indie-showcase.jpg",
+    title: "Game Review Series",
+    description: "In-depth reviews and first impressions of new releases, helping viewers decide what games to play next.",
+    image: "/images/game-reviews.jpg",
     date: "2024-04-20",
-    tags: ["Indie", "Reviews", "Game Dev"],
-    link: "https://youtube.com/playlist?list=indie-showcase",
+    tags: ["Reviews", "Gaming", "Content"],
+    link: "https://youtube.com/playlist?list=maddwrath-reviews",
     featured: false
   },
   {
     id: "4",
-    title: "Viewer Game Night",
-    description: "Monthly multiplayer sessions where viewers can join and play various party games together.",
-    image: "/images/game-night.jpg",
+    title: "Viewer Challenge Nights",
+    description: "Interactive streams where viewers suggest challenges and game modes for entertaining gameplay sessions.",
+    image: "/images/challenge-nights.jpg",
     date: "2024-03-30",
-    tags: ["Multiplayer", "Community", "Party Games"],
+    tags: ["Interactive", "Challenges", "Entertainment"],
     featured: false
-  }
-];
-
-export const blogPosts: BlogPost[] = [
-  {
-    id: "1",
-    title: "My Journey to Affiliate: Lessons Learned",
-    excerpt: "Reflecting on the path to Twitch Affiliate and the key strategies that helped me grow my community.",
-    content: "Full blog post content would go here...",
-    author: "Aaron",
-    date: "2024-06-20",
-    tags: ["Streaming", "Growth", "Tips"],
-    featured_image: "/images/blog-affiliate.jpg",
-    slug: "journey-to-affiliate-lessons-learned"
-  },
-  {
-    id: "2",
-    title: "Building a Positive Community",
-    excerpt: "How I foster a welcoming and inclusive environment for all viewers in my streams.",
-    content: "Full blog post content would go here...",
-    author: "Aaron",
-    date: "2024-06-10",
-    tags: ["Community", "Moderation", "Streaming"],
-    featured_image: "/images/blog-community.jpg",
-    slug: "building-positive-community"
-  },
-  {
-    id: "3",
-    title: "My Streaming Setup Tour 2024",
-    excerpt: "A detailed breakdown of my current streaming setup, including hardware, software, and room layout.",
-    content: "Full blog post content would go here...",
-    author: "Aaron",
-    date: "2024-05-25",
-    tags: ["Setup", "Hardware", "Tech"],
-    featured_image: "/images/blog-setup.jpg",
-    slug: "streaming-setup-tour-2024"
-  }
-];
-
-export const galleryImages = [
-  {
-    id: "1",
-    url: "/images/gallery/highlight-1.jpg",
-    title: "Epic Valorant Ace",
-    description: "My first ace clutch in ranked play",
-    category: "gameplay"
-  },
-  {
-    id: "2",
-    url: "/images/gallery/community-1.jpg",
-    title: "Community Game Night",
-    description: "Amazing turnout for our monthly game night",
-    category: "community"
-  },
-  {
-    id: "3",
-    url: "/images/gallery/setup-1.jpg",
-    title: "New Setup Reveal",
-    description: "Fresh new streaming setup with RGB lighting",
-    category: "setup"
-  },
-  {
-    id: "4",
-    url: "/images/gallery/fanart-1.jpg",
-    title: "Fan Art from @viewer123",
-    description: "Incredible artwork created by our amazing community",
-    category: "fanart"
-  },
-  {
-    id: "5",
-    url: "/images/gallery/event-1.jpg",
-    title: "Charity Stream Success",
-    description: "Celebrating our $5K charity stream milestone",
-    category: "events"
-  },
-  {
-    id: "6",
-    url: "/images/gallery/collab-1.jpg",
-    title: "Collaboration Stream",
-    description: "Playing with other streamers in our community",
-    category: "collaboration"
-  }
-];
-
-export const achievements = [
-  {
-    title: "Twitch Affiliate",
-    description: "Achieved affiliate status within 6 months",
-    icon: "trophy",
-    date: "2024-01-15"
-  },
-  {
-    title: "10K Followers",
-    description: "Reached 10,000 followers milestone",
-    icon: "users",
-    date: "2024-03-20"
-  },
-  {
-    title: "Charity Champion",
-    description: "Raised over $10K for various charities",
-    icon: "heart",
-    date: "2024-06-15"
-  },
-  {
-    title: "Community Builder",
-    description: "Built an active Discord community of 5K+ members",
-    icon: "message-circle",
-    date: "2024-05-10"
   }
 ];

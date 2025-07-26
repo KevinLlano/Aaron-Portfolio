@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Play, Users, Heart, Calendar, Twitch, ArrowRight, Star } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { streamerInfo, socialLinks, projects, achievements } from '@/lib/data';
+import { streamerInfo, socialLinks, projects, streamSchedule } from '@/lib/data';
 import { formatViewCount } from '@/lib/utils';
+import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
   const [isLive, setIsLive] = useState(false);
@@ -16,12 +17,14 @@ export default function Home() {
     const checkLiveStatus = () => {
       // This would be replaced with actual Twitch API call
       setIsLive(Math.random() > 0.5);
-      setViewerCount(Math.floor(Math.random() * 1000) + 100);
+      setViewerCount(Math.floor(Math.random() * 10) + 10);
     };
     checkLiveStatus();
     const interval = setInterval(checkLiveStatus, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const parentDomain = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
 
   return (
     <div className="min-h-screen">
@@ -38,8 +41,12 @@ export default function Home() {
             >
               <div className="flex items-center justify-center lg:justify-start mb-6">
                 <div className="relative">
-                  <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center">
-                    <span className="text-2xl font-bold">A</span>
+                  <div className="w-24 h-24 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full flex items-center justify-center overflow-hidden">
+                    <img
+                      src={streamerInfo.avatar}
+                      alt="Profile Picture"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   {isLive && (
                     <div className="absolute -top-2 -right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold animate-pulse">
@@ -66,13 +73,18 @@ export default function Home() {
                   <span>Watch Live</span>
                   {isLive && <span className="text-sm">({formatViewCount(viewerCount)} viewers)</span>}
                 </Link>
-                <Link
-                  href="/about"
+                <button
+                  onClick={() => {
+                    const element = document.getElementById('about');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                   className="flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg font-semibold transition-colors backdrop-blur-sm"
                 >
                   <span>Learn More</span>
                   <ArrowRight className="h-4 w-4" />
-                </Link>
+                </button>
               </div>
             </motion.div>
 
@@ -83,15 +95,14 @@ export default function Home() {
               className="relative"
             >
               <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg overflow-hidden shadow-2xl">
-                <div className="w-full h-full bg-black/50 flex items-center justify-center">
-                  <div className="text-center">
-                    <Play className="h-16 w-16 mx-auto mb-4 text-white" />
-                    <p className="text-xl font-semibold">Stream Preview</p>
-                    <p className="text-sm text-gray-300">
-                      {isLive ? 'Currently Live!' : 'Stream Offline'}
-                    </p>
-                  </div>
-                </div>
+                <iframe
+                  src={`https://player.twitch.tv/?channel=maddwrath&parent=${parentDomain}`}
+                  allowFullScreen
+                  frameBorder="0"
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen"
+                  title="Maddwrath Twitch Stream"
+                />
               </div>
             </motion.div>
           </div>
@@ -99,7 +110,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-muted/30">
+      <section id="stats" className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <motion.div
@@ -154,15 +165,71 @@ export default function Home() {
               <div className="bg-red-100 dark:bg-red-900/20 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                 <Heart className="h-8 w-8 text-red-600" />
               </div>
-              <h3 className="text-2xl font-bold text-foreground">5K+</h3>
+              <h3 className="text-2xl font-bold text-foreground">100+</h3>
               <p className="text-muted-foreground">Discord Members</p>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Featured Projects */}
-      <section className="py-16">
+      {/* About Section */}
+      <section id="about" className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">About Me</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Learn more about my streaming journey and what makes our community special.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="space-y-6">
+                <div className="bg-card rounded-lg p-8 shadow-lg">
+                  <h3 className="text-xl font-bold text-foreground mb-4">My Story</h3>
+                  <div className="space-y-4 text-muted-foreground">
+                    <p>
+                      I started streaming {streamerInfo.yearsStreaming} years ago with a simple goal: to share my passion for gaming 
+                      and build a community where everyone feels welcome. What began as a hobby has grown into something 
+                      amazing - a place where gamers from all walks of life come together to share laughs, epic moments, 
+                      and genuine connections.
+                    </p>
+                    <p>
+                      My favorite aspect of streaming isn't just the games themselves, but the incredible community that's 
+                      formed around them. Whether we're playing role playing games like Old School Runescape, 
+                      exploring new indie titles, or having late-night horror game sessions, every stream is an adventure 
+                      we share together.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="bg-card rounded-lg p-8 shadow-lg flex items-center justify-center h-full">
+                <img
+                  src="./Aaron.png"
+                  alt="Aaron"
+                  className="rounded-lg object-cover max-h-80 w-auto"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Projects / Video Clips */}
+      <section id="clips" className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Video Clips</h2>
@@ -171,61 +238,52 @@ export default function Home() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.filter(project => project.featured).map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
-                  <Play className="h-12 w-12 text-white" />
-                </div>
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-xl font-bold text-foreground">{project.title}</h3>
-                    <Star className="h-5 w-5 text-yellow-500 fill-current" />
-                  </div>
-                  <p className="text-muted-foreground mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 rounded-full text-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  {project.link && (
-                    <Link
-                      href={project.link}
-                      className="inline-flex items-center space-x-1 text-purple-600 hover:text-purple-700 font-medium"
-                    >
-                      <span>View Project</span>
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
+                <iframe
+                  src="https://clips.twitch.tv/embed?clip=GenerousSingleSquirrelPoooound-Pb1xmp690QggELUv&parent=localhost"
+                  allowFullScreen
+                  frameBorder="0"
+                  className="w-full h-full"
+                  title="Generous Single Squirrel"
+                ></iframe>
+              </div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-card rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
+            >
+              <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
+                <iframe
+                  src="https://clips.twitch.tv/embed?clip=PopularHeartlessAmazonPlanking-tqHsBZ2nbv4KqZzO&parent=localhost"
+                  allowFullScreen
+                  frameBorder="0"
+                  className="w-full h-full"
+                  title="Popular Heartless Amazon"
+                ></iframe>
+              </div>
+            </motion.div>
           </div>
           <div className="text-center mt-8">
-            <Link
-              href="/projects"
-              className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-            >
-              <span>View All Projects</span>
+            <button className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+              <span>View More Clips</span>
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
           </div>
         </div>
       </section>
 
       {/* Stream Schedule */}
-      <section className="py-16 bg-muted/30">
+      <section id="schedule" className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Stream Schedule</h2>
@@ -233,19 +291,20 @@ export default function Home() {
               Join me live on these days for epic gaming sessions!
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {streamerInfo.streamingDays.map((day, index) => (
+          <div className="flex flex-row gap-x-4 overflow-x-auto pb-4 justify-center">
+            {streamSchedule.map((schedule, index) => (
               <motion.div
-                key={day}
+                key={schedule.day}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-card p-6 rounded-lg text-center shadow-lg"
+                className="bg-card p-4 rounded-lg text-center shadow-lg shrink-0 min-w-[200px]"
               >
-                <h3 className="text-lg font-bold text-foreground mb-2">{day}</h3>
-                <p className="text-purple-600 font-semibold mb-2">{streamerInfo.streamingTime}</p>
-                <p className="text-muted-foreground text-sm">{streamerInfo.currentGame}</p>
+                <h3 className="text-lg font-bold text-foreground mb-2">{schedule.day}</h3>
+                <p className="text-purple-600 font-semibold mb-2 text-sm">{schedule.time}</p>
+                <p className="text-muted-foreground text-sm font-medium mb-1">{schedule.game}</p>
+                <p className="text-muted-foreground text-xs">{schedule.description}</p>
               </motion.div>
             ))}
           </div>
@@ -274,7 +333,7 @@ export default function Home() {
                 <span>Follow on Twitch</span>
               </Link>
               <Link
-                href={socialLinks.find(link => link.platform === 'Discord')?.url || '#'}
+                href="https://discord.gg/A6Xddn4YEq"
                 className="flex items-center justify-center space-x-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-lg font-semibold transition-colors backdrop-blur-sm"
               >
                 <span>Join Discord</span>
@@ -282,6 +341,30 @@ export default function Home() {
               </Link>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-16 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Get In Touch</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Have a question, collaboration idea, or just want to say hi? I'd love to hear from you!
+            </p>
+          </div>
+          
+          <div className="max-w-2xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="bg-card rounded-lg p-8 shadow-lg"
+            >
+              <ContactForm />
+            </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -2,26 +2,53 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Menu, X, Twitch, Home, User, Play, Briefcase, Image, MessageCircle, BookOpen, ExternalLink } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, Twitch, Home, User, Play, Briefcase, Image, MessageCircle, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
 import { streamerInfo } from '@/lib/data';
 
 const navigation = [
   { name: 'Home', href: '/', icon: Home },
-  { name: 'About', href: '/about', icon: User },
-  { name: 'Streams', href: '/streams', icon: Play },
-  { name: 'Gallery', href: '/gallery', icon: Image },
-  { name: 'Blog', href: '/blog', icon: BookOpen },
+  { name: 'About', href: '/#about', icon: User },
+  { name: 'Video Clips', href: '/#clips', icon: Image },
+  { name: 'Stream Schedule', href: '/#schedule', icon: Play },
   { name: 'Contact', href: '/contact', icon: MessageCircle },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleNavClick = (href: string) => {
+    setIsOpen(false); // Close mobile menu
+    
+    if (href.startsWith('/#')) {
+      // Handle section navigation
+      const sectionId = href.substring(2);
+      
+      if (pathname === '/') {
+        // Already on home page, just scroll to section
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to home page first, then scroll to section
+        router.push('/');
+        // Wait for navigation to complete, then scroll
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -42,13 +69,34 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => {
               const Icon = item.icon;
+              const isSection = item.href.startsWith('/#');
+              const isActive = isSection 
+                ? false // We'll handle active states for sections differently
+                : pathname === item.href;
+              
+              if (isSection) {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.href)}
+                    className={cn(
+                      "flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                      "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    )}
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{item.name}</span>
+                  </button>
+                );
+              }
+              
               return (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
                     "flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors",
-                    pathname === item.href
+                    isActive
                       ? "text-purple-600 bg-purple-50 dark:bg-purple-900/20"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}
@@ -94,6 +142,27 @@ export default function Navbar() {
           <div className="px-2 pt-2 pb-3 space-y-1 bg-background border-b border-border">
             {navigation.map((item) => {
               const Icon = item.icon;
+              const isSection = item.href.startsWith('/#');
+              const isActive = isSection 
+                ? false
+                : pathname === item.href;
+              
+              if (isSection) {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => handleNavClick(item.href)}
+                    className={cn(
+                      "flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors w-full text-left",
+                      "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    )}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span>{item.name}</span>
+                  </button>
+                );
+              }
+              
               return (
                 <Link
                   key={item.name}
@@ -101,7 +170,7 @@ export default function Navbar() {
                   onClick={toggleMenu}
                   className={cn(
                     "flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium transition-colors",
-                    pathname === item.href
+                    isActive
                       ? "text-purple-600 bg-purple-50 dark:bg-purple-900/20"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
                   )}

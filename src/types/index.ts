@@ -47,18 +47,6 @@ export interface SocialLink {
   color: string;
 }
 
-export interface BlogPost {
-  id: string;
-  title: string;
-  excerpt: string;
-  content: string;
-  author: string;
-  date: string;
-  tags: string[];
-  featured_image: string;
-  slug: string;
-}
-
 export interface ContactFormData {
   name: string;
   email: string;
