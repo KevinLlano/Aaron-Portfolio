@@ -2,18 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Play, Users, Heart, Calendar, Twitch, ArrowRight, Star } from 'lucide-react';
+import { Play, Users, Heart, Calendar, Twitch, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { streamerInfo, socialLinks, projects, streamSchedule } from '@/lib/data';
+import { streamerInfo, socialLinks, streamSchedule } from '@/lib/data';
 import { formatViewCount } from '@/lib/utils';
 import ContactForm from '@/components/ContactForm';
 
 export default function Home() {
   const [isLive, setIsLive] = useState(false);
   const [viewerCount, setViewerCount] = useState(0);
+  const [hasMounted, setHasMounted] = useState(false);
 
   // Simulate live status check
   useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!hasMounted) return;
+    
     const checkLiveStatus = () => {
       // This would be replaced with actual Twitch API call
       setIsLive(Math.random() > 0.5);
@@ -22,7 +29,7 @@ export default function Home() {
     checkLiveStatus();
     const interval = setInterval(checkLiveStatus, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [hasMounted]);
 
   const parentDomain = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
 
@@ -48,7 +55,7 @@ export default function Home() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  {isLive && (
+                  {hasMounted && isLive && (
                     <div className="absolute -top-2 -right-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-bold animate-pulse">
                       LIVE
                     </div>
@@ -56,7 +63,7 @@ export default function Home() {
                 </div>
               </div>
               <h1 className="text-4xl lg:text-6xl font-bold mb-4">
-                Hey, I'm <span className="text-purple-400">{streamerInfo.name}</span>
+                Hey, I&apos;m <span className="text-purple-400">{streamerInfo.name}</span>
               </h1>
               <p className="text-xl lg:text-2xl mb-6 text-gray-300">
                 {streamerInfo.tagline}
@@ -65,16 +72,18 @@ export default function Home() {
                 {streamerInfo.bio}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link
+                <a
                   href={socialLinks.find(link => link.platform === 'Twitch')?.url || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center justify-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
                 >
                   <Twitch className="h-5 w-5" />
                   <span>Watch Live</span>
-                  {isLive && <span className="text-sm">({formatViewCount(viewerCount)} viewers)</span>}
-                </Link>
+                  {hasMounted && isLive && <span className="text-sm">({formatViewCount(viewerCount)} viewers)</span>}
+                </a>
                 <button
-                  onClick={() => {
+                  onClick={() => {  
                     const element = document.getElementById('about');
                     if (element) {
                       element.scrollIntoView({ behavior: 'smooth' });
@@ -200,8 +209,8 @@ export default function Home() {
                       and genuine connections.
                     </p>
                     <p>
-                      My favorite aspect of streaming isn't just the games themselves, but the incredible community that's 
-                      formed around them. Whether we're playing role playing games like Old School Runescape, 
+                      My favorite aspect of streaming isn&apos;t just the games themselves, but the incredible community that&apos;s 
+                      formed around them. Whether we&apos;re playing role playing games like Old School Runescape, 
                       exploring new indie titles, or having late-night horror game sessions, every stream is an adventure 
                       we share together.
                     </p>
@@ -274,10 +283,15 @@ export default function Home() {
             </motion.div>
           </div>
           <div className="text-center mt-8">
-            <button className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+            <a
+              href="https://www.twitch.tv/maddwrath/clips?filter=clips&range=all"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            >
               <span>View More Clips</span>
               <ArrowRight className="h-4 w-4" />
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -350,7 +364,7 @@ export default function Home() {
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-foreground mb-4">Get In Touch</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Have a question, collaboration idea, or just want to say hi? I'd love to hear from you!
+              Have a question, collaboration idea, or just want to say hi? I&apos;d love to hear from you!
             </p>
           </div>
           

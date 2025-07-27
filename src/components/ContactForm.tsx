@@ -26,24 +26,24 @@ export default function ContactForm() {
     const templateParams = {
       from_name: formData.name,
       from_email: formData.email,
-      to_name: "Your Name",
-      to_email: "ke.bleach@gmail.com",
+      to_name: "Aaron Birmingham",
+      to_email: "aaronbirmingham@gmail.com",
       subject: formData.subject,
       message: formData.message,
     };
     emailjs
       .send(
-        "service_x9c5lxl", // Replace with your EmailJS service ID
-        "template_5754eaz", // Replace with your EmailJS template ID
+        "service_bx8vh5g", 
+        "template_zsk51n8", 
         templateParams,
-        "q1SI5s-QZcSnaWZy6" // Replace with your EmailJS public key
+        "3uvYsSOhp3aw_FePo" 
       )
       .then(
-        (response) => {
+        () => {
           setStatus("Message sent successfully!");
           setFormData({ name: "", email: "", subject: "", message: "" });
         },
-        (error) => {
+        () => {
           setStatus("Error sending message. Please try again later.");
         }
       )

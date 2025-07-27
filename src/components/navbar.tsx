@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, Twitch, Home, User, Play, Briefcase, Image, MessageCircle, ExternalLink } from 'lucide-react';
+import { Menu, X, Twitch, Home, User, Play, Image, MessageCircle, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ThemeToggle } from './theme-toggle';
 import { streamerInfo } from '@/lib/data';

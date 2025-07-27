@@ -7,7 +7,7 @@ export const streamerInfo = {
   bio: "Gaming enthusiast and content creator bringing you epic gameplay, exciting moments, and a community built on great vibes. Join the madness!",
   avatar: "/profilepic.png",
   banner: "/images/banner.jpg",
-  location: "Gaming Setup",
+  location: "Australia, Melbourne",
   yearsStreaming: 5,
   totalFollowers: 850,
   totalViews: 12500,
@@ -26,34 +26,22 @@ export const socialLinks: SocialLink[] = [
     color: "#9146FF"
   },
   {
-    platform: "YouTube",
-    url: "https://youtube.com/@maddwrath",
-    icon: "youtube",
-    color: "#FF0000"
-  },
-  {
     platform: "Discord",
     url: "https://discord.gg/A6Xddn4YEq",
     icon: "discord",
     color: "#5865F2"
   },
   {
-    platform: "Instagram",
-    url: "https://instagram.com/maddwrath",
-    icon: "instagram",
-    color: "#E4405F"
-  },
-  {
     platform: "TikTok",
-    url: "https://tiktok.com/@maddwrath",
+    url: "https://www.tiktok.com/@maddwrath",
     icon: "tiktok",
     color: "#ec4899" 
   },
   {
-    platform: "X",
-    url: "https://twitter.com/maddwrath",
-    icon: "x",
-    color: "#22c55e" 
+    platform: "Kick",
+    url: "https://kick.com/maddwrath",
+    icon: "play",
+    color: "#53FC18"
   }
 ];
 
@@ -61,31 +49,31 @@ export const streamSchedule: StreamSchedule[] = [
   
   {
     day: "Tuesday",
-    time: "4:00 AM - 9:00 AM CDT",
+    time: "7 PM – 10 PM AEST",
     game: "Action Adventures",
     description: "Thrilling adventures"
   },
   {
     day: "Wednesday",
-    time: "4:00 AM - 9:00 AM CDT",
+    time: "7 PM – 10 PM AEST",
     game: "Action Adventures",
     description: "Old School Runescape"
   },
   {
     day: "Thursday",
-    time: "4:00 AM - 9:00 AM CDT",
+    time: "7 PM – 10 PM AEST",
     game: "FPS Games",
     description: "competitive gameplay"
   },
   {
     day: "Friday",
-    time: "4:00 AM - 9:00 AM CDT",
+    time: "7 PM – 10 PM AEST",
     game: "Variety Night",
     description: "viewer suggestions"
   },
   {
     day: "Saturday",
-    time: "4:00 AM - 9:00 AM CDT",
+    time: "7 PM – 10 PM AEST",
     game: "Variety Night",
     description: "Chat Interaction"
   }

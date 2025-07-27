@@ -38,4 +38,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# Ignore confidential contact form
+src/components/ContactForm.tsx
 next-env.d.ts
