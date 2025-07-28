@@ -32,6 +32,9 @@ export default function Home() {
   }, [hasMounted]);
 
   const parentDomain = typeof window !== 'undefined' ? window.location.hostname : 'localhost';
+  const twitchParents = typeof window !== 'undefined' 
+    ? [window.location.hostname, 'localhost', 'maddwrath.vercel.app'].filter(Boolean).join('&parent=')
+    : 'localhost&parent=maddwrath.vercel.app';
 
   return (
     <div className="min-h-screen">
@@ -105,7 +108,7 @@ export default function Home() {
             >
               <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 rounded-lg overflow-hidden shadow-2xl">
                 <iframe
-                  src={`https://player.twitch.tv/?channel=maddwrath&parent=${parentDomain}`}
+                  src={`https://player.twitch.tv/?channel=maddwrath&parent=${twitchParents}`}
                   allowFullScreen
                   frameBorder="0"
                   className="w-full h-full"
@@ -256,7 +259,7 @@ export default function Home() {
             >
               <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
                 <iframe
-                  src="https://clips.twitch.tv/embed?clip=GenerousSingleSquirrelPoooound-Pb1xmp690QggELUv&parent=localhost"
+                  src={`https://clips.twitch.tv/embed?clip=GenerousSingleSquirrelPoooound-Pb1xmp690QggELUv&parent=${twitchParents}`}
                   allowFullScreen
                   frameBorder="0"
                   className="w-full h-full"
@@ -273,7 +276,7 @@ export default function Home() {
             >
               <div className="aspect-video bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center">
                 <iframe
-                  src="https://clips.twitch.tv/embed?clip=PopularHeartlessAmazonPlanking-tqHsBZ2nbv4KqZzO&parent=localhost"
+                  src={`https://clips.twitch.tv/embed?clip=PopularHeartlessAmazonPlanking-tqHsBZ2nbv4KqZzO&parent=${twitchParents}`}
                   allowFullScreen
                   frameBorder="0"
                   className="w-full h-full"
