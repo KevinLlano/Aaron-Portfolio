@@ -63,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta name="google-site-verification" content="google494bb948bd5caabb.html" />
+        <meta name="google-site-verification" content="Nli5mGhz5o3QrzPm3tCGDhv0MptdVgjckTwPJh1WQjs" />
       </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
