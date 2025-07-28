@@ -16,6 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://maddwrath.vercel.app'),
   title: "MaddWrath | Twitch Streamer, Gaming Content Creator & Community Leader",
   description:
     "Watch MaddWrath live on Twitch! Explore epic gameplay, community events, Old School Runescape, RPGs, FPS, and more. Join a positive, interactive gaming community and never miss a stream or highlight.",

@@ -223,6 +223,38 @@ export default function Contact() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="space-y-8"
           >
+            {/* Social Links */}
+            <div className="bg-card rounded-lg p-8 shadow-lg">
+              <h3 className="text-xl font-bold text-foreground mb-6">Connect on Social Media</h3>
+              <div className="space-y-3">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.platform}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: social.color + '20' }}>
+                      <span style={{ color: social.color }}>
+                        {getSocialIcon(social.platform)}
+                      </span>
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground">{social.platform}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {social.platform === 'Twitch' && 'Follow for live streams'}
+                        {social.platform === 'Discord' && 'Join our community'}
+                        {social.platform === 'Kick' && 'Live streaming platform'}
+                        {social.platform === 'TikTok' && 'Short-form video content'}
+                      </p>
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-muted-foreground ml-auto" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
             {/* Contact Info */}
             <div className="bg-card rounded-lg p-8 shadow-lg">
               <h3 className="text-xl font-bold text-foreground mb-6">Contact Information</h3>
@@ -254,38 +286,6 @@ export default function Contact() {
                     <p className="font-semibold text-foreground">Usually within 24 hours</p>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            {/* Social Links */}
-            <div className="bg-card rounded-lg p-8 shadow-lg">
-              <h3 className="text-xl font-bold text-foreground mb-6">Connect on Social Media</h3>
-              <div className="space-y-3">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.platform}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center space-x-3 p-3 rounded-lg hover:bg-muted transition-colors"
-                  >
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: social.color + '20' }}>
-                      <span style={{ color: social.color }}>
-                        {getSocialIcon(social.platform)}
-                      </span>
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground">{social.platform}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {social.platform === 'Twitch' && 'Follow for live streams'}
-                        {social.platform === 'Discord' && 'Join our community'}
-                        {social.platform === 'Kick' && 'Live streaming platform'}
-                        {social.platform === 'TikTok' && 'Short-form video content'}
-                      </p>
-                    </div>
-                    <ExternalLink className="h-4 w-4 text-muted-foreground ml-auto" />
-                  </a>
-                ))}
               </div>
             </div>
           </motion.div>

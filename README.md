@@ -234,15 +234,8 @@ The app can be deployed to any platform that supports Next.js:
 
 ## 📄 License
 
-This project code was created solely by me, Kevin Llanos. The site owner is Aaron Melvorn
+This project code was created solely by me, Kevin Llanos. The site owner is Aaron Birmingham
 
-## 🙏 Acknowledgments
-
-- Next.js team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- Framer Motion for smooth animations
-- Lucide React for beautiful icons
-- The streaming community for inspiration
 
 ---
 
